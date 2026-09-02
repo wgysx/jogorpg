@@ -98,6 +98,12 @@ botão resolve uma `Future` (isso acontece dentro de `utils_web.py`).
 
 ## ▶️ Como rodar cada versão
 
+### Inicialização rápida no Windows
+
+Com o Python instalado, dê duplo clique em `iniciar_jogo.bat` na pasta
+do projeto. O arquivo inicia o servidor local, abre a versão PyScript no
+navegador e mantém o servidor ativo enquanto esta janela estiver aberta.
+
 ### 1. Terminal (Python puro)
 
 ```bash
