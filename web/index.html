@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A Última Chama de Eldareth</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="ceu">
+    <div class="neve" id="neve"></div>
+  </div>
+
+  <main class="tela">
+    <header class="cabecalho">
+      <p class="eyebrow">um jogo de aventura em texto</p>
+      <h1>A Última Chama<span>de Eldareth</span></h1>
+    </header>
+
+    <section class="hud" id="hud" aria-live="polite">
+      <div class="hud-item">
+        <span class="hud-label">Vida</span>
+        <div class="barra-vida"><div class="barra-vida-preenchida" id="barra-vida"></div></div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Coragem</span>
+        <span class="hud-valor" id="valor-coragem">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Sabedoria</span>
+        <span class="hud-valor" id="valor-sabedoria">0</span>
+      </div>
+      <div class="hud-item hud-item--itens">
+        <span class="hud-label">Itens</span>
+        <span class="hud-valor" id="valor-itens">nenhum</span>
+      </div>
+    </section>
+
+    <section class="janela-narrativa">
+      <div class="chama" aria-hidden="true"></div>
+      <div id="texto-cena" class="texto-cena"></div>
+      <div id="area-escolhas" class="area-escolhas"></div>
+    </section>
+
+    <footer class="rodape">
+      <button id="botao-reiniciar" class="botao-fantasma">Recomeçar jornada</button>
+      <p class="creditos">Projeto escolar — modelado com funções em Python e adaptado para o navegador.</p>
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
+https://laughing-funicular-4jj67qwvv4x7cqgg5-5500.app.github.dev/web/index.html
