@@ -1,0 +1,14 @@
+# pyscript.toml
+# Diz ao PyScript quais arquivos buscar e ONDE colocá-los no sistema de
+# arquivos virtual do navegador (Pyodide), para que os `import` dentro
+# de main_web.py funcionem exatamente como funcionariam rodando
+# `python3 main.py` no terminal.
+#
+# Sintaxe oficial: cada linha é "origem" = "destino".
+# https://docs.pyscript.net/2024.7.1/user-guide/configuration/#files
+
+[files]
+"./player.py" = "./player.py"
+"./utils_web.py" = "./utils_web.py"
+"./scenes_web.py" = "./scenes_web.py"
+"./data/itens.json" = "./data/itens.json"

@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root{
+  --noite-1:#0a0e1a;
+  --noite-2:#111a2e;
+  --gelo:#a9c4de;
+  --gelo-fraco:#5f7692;
+  --ambar:#ff9d42;
+  --ambar-forte:#ffb35c;
+  --brasa:#ff5a3c;
+  --pergaminho:#eae2d0;
+  --linha:rgba(169,196,222,0.18);
+  --fonte-display:'Cinzel', serif;
+  --fonte-corpo:'Spectral', serif;
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -10%, #1b2740 0%, var(--noite-1) 55%),
+    var(--noite-1);
+  color:var(--gelo);
+  font-family:var(--fonte-corpo);
+}
+
+body{ position:relative; overflow-x:hidden; }
+
+/* --------- neve ambiente (elemento de assinatura) --------- */
+.ceu{ position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.neve span{
+  position:absolute;
+  top:-10px;
+  display:block;
+  width:3px; height:3px;
+  border-radius:50%;
+  background:var(--gelo);
+  opacity:.55;
+  animation:cair linear infinite;
+}
+@keyframes cair{
+  to{ transform:translateY(105vh) translateX(var(--deslocamento,0px)); }
+}
+@media (prefers-reduced-motion: reduce){
+  .neve span{ animation:none; display:none; }
+}
+
+.tela{
+  position:relative;
+  z-index:1;
+  max-width:760px;
+  margin:0 auto;
+  padding:48px 24px 32px;
+}
+
+.cabecalho{ text-align:center; margin-bottom:28px; }
+.eyebrow{
+  font-family:var(--fonte-display);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:11px;
+  color:var(--ambar-forte);
+  margin:0 0 10px;
+}
+h1{
+  font-family:var(--fonte-display);
+  font-weight:700;
+  font-size:clamp(28px, 5vw, 42px);
+  line-height:1.15;
+  margin:0;
+  color:var(--pergaminho);
+  text-shadow:0 0 22px rgba(255,157,66,.18);
+}
+h1 span{
+  display:block;
+  font-size:.5em;
+  font-weight:500;
+  letter-spacing:.08em;
+  color:var(--gelo-fraco);
+  margin-top:6px;
+}
+
+/* --------- HUD --------- */
+.hud{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1.4fr;
+  gap:10px;
+  margin-bottom:22px;
+  padding:14px 16px;
+  border:1px solid var(--linha);
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(169,196,222,.05), rgba(169,196,222,.02));
+}
+.hud-item{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.hud-label{
+  font-family:var(--fonte-display);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--gelo-fraco);
+}
+.hud-valor{
+  font-size:15px;
+  color:var(--pergaminho);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.hud-item--itens{ grid-column:span 1; }
+.barra-vida{
+  height:8px;
+  border-radius:5px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.barra-vida-preenchida{
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg, var(--brasa), var(--ambar));
+  transition:width .5s ease;
+}
+
+/* --------- janela de narrativa --------- */
+.janela-narrativa{
+  position:relative;
+  border:1px solid var(--linha);
+  border-radius:14px;
+  padding:30px 28px 26px;
+  background:
+    linear-gradient(180deg, rgba(17,26,46,.9), rgba(10,14,26,.95));
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.7);
+  min-height:280px;
+}
+.chama{
+  position:absolute;
+  top:-16px; left:28px;
+  width:18px; height:26px;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%, var(--ambar-forte), var(--brasa) 60%, transparent 75%);
+  filter:blur(.3px);
+  animation:tremular 2.4s ease-in-out infinite;
+  box-shadow:0 0 24px 6px rgba(255,120,60,.35);
+}
+@keyframes tremular{
+  0%,100%{ transform:scaleY(1) rotate(-1deg); }
+  50%{ transform:scaleY(1.12) rotate(2deg); }
+}
+
+.texto-cena{
+  font-size:17px;
+  line-height:1.7;
+  color:var(--pergaminho);
+  white-space:pre-line;
+}
+.texto-cena p{ margin:0 0 14px; }
+.texto-cena p:last-child{ margin-bottom:0; }
+.texto-cena .destaque{ color:var(--ambar-forte); font-style:italic; }
+
+.area-escolhas{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:24px;
+}
+.botao-escolha{
+  text-align:left;
+  font-family:var(--fonte-corpo);
+  font-size:15px;
+  color:var(--pergaminho);
+  background:rgba(169,196,222,.04);
+  border:1px solid var(--linha);
+  border-radius:10px;
+  padding:13px 16px;
+  cursor:pointer;
+  transition:border-color .15s ease, background .15s ease, transform .1s ease;
+}
+.botao-escolha:hover, .botao-escolha:focus-visible{
+  border-color:var(--ambar);
+  background:rgba(255,157,66,.08);
+  transform:translateX(2px);
+}
+.botao-escolha:focus-visible{ outline:2px solid var(--ambar); outline-offset:2px; }
+
+.campo-nome{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.campo-nome input{
+  flex:1;
+  min-width:180px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--linha);
+  border-radius:8px;
+  padding:12px 14px;
+  color:var(--pergaminho);
+  font-family:var(--fonte-corpo);
+  font-size:15px;
+}
+.campo-nome input:focus-visible{ outline:2px solid var(--ambar); }
+.botao-primario{
+  font-family:var(--fonte-display);
+  font-size:13px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#1a1206;
+  background:linear-gradient(180deg, var(--ambar-forte), var(--ambar));
+  border:none;
+  border-radius:8px;
+  padding:0 22px;
+  cursor:pointer;
+}
+.botao-primario:hover{ filter:brightness(1.06); }
+
+.rodape{
+  text-align:center;
+  margin-top:26px;
+}
+.botao-fantasma{
+  font-family:var(--fonte-display);
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gelo-fraco);
+  background:transparent;
+  border:1px solid var(--linha);
+  border-radius:20px;
+  padding:9px 20px;
+  cursor:pointer;
+}
+.botao-fantasma:hover{ color:var(--ambar-forte); border-color:var(--ambar); }
+.creditos{
+  margin:14px 0 0;
+  font-size:12px;
+  color:var(--gelo-fraco);
+}
+
+.rotulo-final{
+  display:inline-block;
+  font-family:var(--fonte-display);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ambar-forte);
+  border:1px solid rgba(255,157,66,.4);
+  border-radius:20px;
+  padding:5px 14px;
+  margin-bottom:14px;
+}
+
+@media (max-width:520px){
+  .hud{ grid-template-columns:1fr 1fr; }
+  .hud-item--itens{ grid-column:span 2; }
+}
+
+/* --------- ajustes específicos da versão PyScript --------- */
+.botao-continuar{
+  text-align:center;
+  font-family:var(--fonte-display);
+  letter-spacing:.04em;
+}
+py-splash-screen, .py-overlay{
+  background:var(--noite-1) !important;
+  color:var(--gelo) !important;
+}

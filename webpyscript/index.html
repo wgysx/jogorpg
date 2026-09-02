@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A Última Chama de Eldareth — versão PyScript</title>
+<link rel="stylesheet" href="style.css" />
+
+<!-- PyScript: é isso que permite o Python (scenes_web.py, main_web.py)
+     rodar DENTRO do navegador, sem nenhum servidor Python por trás. -->
+<link rel="stylesheet" href="https://pyscript.net/releases/2024.7.1/core.css" />
+<script type="module" src="https://pyscript.net/releases/2024.7.1/core.js"></script>
+</head>
+<body>
+
+  <div class="ceu">
+    <div class="neve" id="neve"></div>
+  </div>
+
+  <main class="tela">
+    <header class="cabecalho">
+      <p class="eyebrow">um jogo de aventura em texto · rodando em Python, via PyScript</p>
+      <h1>A Última Chama<span>de Eldareth</span></h1>
+    </header>
+
+    <section class="hud" id="hud" aria-live="polite">
+      <div class="hud-item">
+        <span class="hud-label">Vida</span>
+        <div class="barra-vida"><div class="barra-vida-preenchida" id="barra-vida"></div></div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Coragem</span>
+        <span class="hud-valor" id="valor-coragem">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Sabedoria</span>
+        <span class="hud-valor" id="valor-sabedoria">0</span>
+      </div>
+      <div class="hud-item hud-item--itens">
+        <span class="hud-label">Itens</span>
+        <span class="hud-valor" id="valor-itens">nenhum</span>
+      </div>
+    </section>
+
+    <section class="janela-narrativa">
+      <div class="chama" aria-hidden="true"></div>
+      <div id="texto-cena" class="texto-cena">
+        <p>Carregando o motor do jogo em Python (PyScript)… isso pode
+        levar alguns segundos na primeira vez, enquanto o navegador
+        baixa o interpretador Python.</p>
+      </div>
+      <div id="area-escolhas" class="area-escolhas"></div>
+    </section>
+
+    <footer class="rodape">
+      <p class="creditos">
+        Projeto escolar — o código Python original (main.py / scenes.py /
+        player.py / utils.py) roda de verdade aqui, dentro do navegador,
+        graças ao framework <strong>PyScript</strong>.
+      </p>
+    </footer>
+  </main>
+
+  <!-- O jogo em si: mesmas cenas de scenes.py, adaptadas em scenes_web.py -->
+  <script type="py" src="./main_web.py" config="./pyscript.toml"></script>
+
+  <!-- Puramente decorativo (o efeito de neve caindo) — não faz parte
+       da lógica do jogo, por isso continua em JavaScript comum. -->
+  <script>
+    (function criarNeve() {
+      const container = document.getElementById("neve");
+      const quantidade = window.innerWidth < 600 ? 26 : 46;
+      for (let i = 0; i < quantidade; i++) {
+        const floco = document.createElement("span");
+        const duracao = 8 + Math.random() * 12;
+        const atraso = Math.random() * 12;
+        const deslocamento = (Math.random() * 60 - 30).toFixed(0) + "px";
+        floco.style.left = Math.random() * 100 + "vw";
+        floco.style.animationDuration = duracao + "s";
+        floco.style.animationDelay = "-" + atraso + "s";
+        floco.style.setProperty("--deslocamento", deslocamento);
+        container.appendChild(floco);
+      }
+    })();
+  </script>
+</body>
+</html>
